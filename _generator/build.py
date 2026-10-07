@@ -79,7 +79,7 @@ def head(title, desc, canonical):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{BIZ['domain']}/{canonical}">
-<link rel="icon" type="image/png" href="assets/img/logo.jpg">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
@@ -95,10 +95,9 @@ def head(title, desc, canonical):
 
 def chrome_top(active):
     links = ""
-    for href, label in NAV[1:-1]:
+    for href, label in NAV[1:]:
         cls = ' class="active"' if href == active else ""
         links += f'    <a href="{href}"{cls}>{label}</a>\n'
-    home_cls = ' class="active"' if active == "index.html" else ""
     return f"""
 <!-- DEMO — delete this div, the .footer-demo block, section 5 of main.js and
      the .demo-bar/.demo-modal CSS when the site goes live. -->
@@ -117,8 +116,8 @@ def chrome_top(active):
 </div></div>
 
 <header class="site-header"><div class="wrap nav-row">
-  <a class="brand" href="index.html"{home_cls} aria-label="United Electrical Surplus &mdash; home">
-    <img src="assets/img/logo.jpg" alt="United Electrical Surplus" width="800" height="800">
+  <a class="brand" href="index.html" aria-label="United Electrical Surplus &mdash; home">
+    <img src="assets/img/logo.png" alt="United Electrical Surplus" width="791" height="754">
   </a>
   <button class="nav-burger" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/></svg></button>
   <nav class="main-nav">
