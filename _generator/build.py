@@ -12,6 +12,11 @@ BIZ = {
     "name": "United Electrical Surplus",
     "phone_disp": "404-831-3600",
     "phone_tel": "4048313600",
+    "phone2_disp": "678-548-1941",
+    "phone2_tel": "6785481941",
+    # The "#1 in America" superlative lives here so it is one string to soften
+    # if Vinnie ever wants to walk it back. See DEMO-NOTES.md.
+    "rank_claim": "America&rsquo;s #1 buyer of electrical equipment",
     "email": "info@unitedelectricalsurplus.com",
     "email2": "unitedelectricalsurplus@yahoo.com",
     "addr1": "621 Hurricane Shoals Rd NW, Lawrenceville, GA 30046",
@@ -88,7 +93,7 @@ def head(title, desc, canonical):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=3">
+<link rel="stylesheet" href="assets/css/main.css?v=4">
 </head>
 <body>
 """
@@ -110,8 +115,9 @@ def chrome_top(active):
 
 <div class="util-bar"><div class="wrap">
   <a href="tel:{BIZ['phone_tel']}">{I['phone']} {BIZ['phone_disp']}</a>
+  <a href="tel:{BIZ['phone2_tel']}">{I['phone']} {BIZ['phone2_disp']}</a>
   <span class="util-hide">{I['clock']} {BIZ['hours']}</span>
-  <span class="util-hide">{I['pin']} Lawrenceville &amp; Buford, Georgia</span>
+  <span class="util-hide">{I['pin']} Serving all of Georgia</span>
   <span class="util-spacer"></span>
   <a class="util-hide" href="mailto:{BIZ['email']}">{I['mail']} {BIZ['email']}</a>
 </div></div>
@@ -137,8 +143,8 @@ def chrome_footer():
   <div class="wrap footer-main">
     <div class="footer-brand">
       <img src="assets/img/logo-white.png" alt="United Electrical Surplus" width="454" height="405">
-      <p>We buy and sell surplus electrical equipment &mdash; and we pay more for it than
-      anyone in the business. Based in Gwinnett County, Georgia. Buying nationwide.</p>
+      <p>{BIZ['rank_claim']} &mdash; new and used, all types. We come to you anywhere in
+      Georgia and pay cash on the spot.</p>
       <div class="footer-social">
         <a href="{BIZ['facebook']}" target="_blank" rel="noopener" aria-label="Facebook">{I['fb']}</a>
         <a href="{BIZ['google_page']}" target="_blank" rel="noopener" aria-label="Google Business Profile">{I['google']}</a>
@@ -164,6 +170,7 @@ def chrome_footer():
       <h4>Talk to us</h4>
       <ul>
         <li>{I['phone']} <a href="tel:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a></li>
+        <li>{I['phone']} <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a></li>
         <li>{I['mail']} <a href="mailto:{BIZ['email']}">{BIZ['email']}</a></li>
         <li>{I['pin']} <span>{BIZ['addr1']}</span></li>
         <li>{I['pin']} <span>{BIZ['addr2']}</span></li>
@@ -186,7 +193,7 @@ def chrome_footer():
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=3"></script>
+<script src="assets/js/main.js?v=4"></script>
 </body>
 </html>
 """
@@ -215,7 +222,8 @@ def cta_band(h, p, primary=("sell.html", "Get a Cash Offer"), secondary=None):
     <p>{p}</p>
     <div class="hero-ctas">
       <a class="btn btn-gold" href="{primary[0]}">{I['cash']} {primary[1]}</a>
-      <a class="btn btn-ghost" href="tel:{BIZ['phone_tel']}">{I['phone']} Call {BIZ['phone_disp']}</a>
+      <a class="btn btn-ghost" href="tel:{BIZ['phone_tel']}">{I['phone']} {BIZ['phone_disp']}</a>
+      <a class="btn btn-ghost" href="tel:{BIZ['phone2_tel']}">{I['phone']} {BIZ['phone2_disp']}</a>
 {sec}    </div>
   </div>
 </section>
@@ -229,9 +237,9 @@ schema = f"""
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "United Electrical Surplus",
-  "description": "Buyer and seller of surplus electrical equipment: circuit breakers, panelboards, switchgear, transformers, bus duct, motor controls and more. Cash paid on the spot; pickup available nationwide.",
+  "description": "Buyer and seller of all types of new and used electrical equipment: circuit breakers, panelboards, switchgear, transformers, bus duct, motor controls and more. Serving the whole state of Georgia with on-site pickup and cash paid on the spot.",
   "url": "{BIZ['domain']}",
-  "telephone": "+1-404-831-3600",
+  "telephone": ["+1-404-831-3600", "+1-678-548-1941"],
   "email": "{BIZ['email']}",
   "image": "{BIZ['domain']}/assets/img/logo.jpg",
   "priceRange": "$$",
@@ -244,7 +252,10 @@ schema = f"""
     "addressCountry": "US"
   }},
   "openingHours": "Mo-Su 00:00-23:59",
-  "areaServed": ["Georgia", "Tennessee", "Alabama", "Florida", "Texas", "Oklahoma", "Louisiana", "North Carolina"],
+  "areaServed": [
+    {{"@type": "State", "name": "Georgia"}},
+    "Tennessee", "Alabama", "Florida", "Texas", "Oklahoma", "Louisiana", "North Carolina"
+  ],
   "sameAs": ["{BIZ['google_page']}"]
 }}
 </script>"""
@@ -254,18 +265,20 @@ index_body = f"""
   <div class="hero-media"><img src="assets/img/photos/hero-warehouse.jpg" alt="Aisles of surplus electrical equipment in the United Electrical Surplus warehouse" fetchpriority="high"></div>
   <div class="wrap"><div class="hero-split">
     <div class="hero-inner" data-reveal>
-      <div class="kicker on-dark" style="color:var(--gold)">Lawrenceville, Georgia &middot; Buying Nationwide</div>
+      <div class="kicker on-dark" style="color:var(--gold)">{BIZ['rank_claim']}</div>
       <h1>We pay more for surplus electrical. <em>Cash, on the spot.</em></h1>
-      <p class="hero-sub">Square&nbsp;D, Siemens, Eaton, ABB, GE &mdash; breakers, panels, switchgear,
-      transformers and everything in between. If it&rsquo;s sitting in your warehouse, on your job site
-      or coming out of a demo, we&rsquo;ll beat any other offer on it.</p>
+      <p class="hero-sub">All types, new and used &mdash; breakers, panels, switchgear,
+      transformers and everything in between, from Square&nbsp;D, Siemens, Eaton, ABB and GE.
+      We service the whole state of Georgia, we come to you, and we&rsquo;ll beat any other
+      offer on it.</p>
       <div class="hero-ctas">
         <a class="btn btn-gold" href="sell.html">{I['cash']} Get a Cash Offer</a>
         <a class="btn btn-ghost" href="buy.html">Browse What We Sell</a>
       </div>
       <div class="hero-chips">
-        <span>{I['star']} 5.0 rating on Google</span>
+        <span>{I['pin']} All of Georgia</span>
         <span>{I['truck']} We come to you</span>
+        <span>{I['star']} 5.0 on Google</span>
         <span>{I['bolt']} Same-day offers</span>
       </div>
     </div>
@@ -278,15 +291,16 @@ index_body = f"""
         <li><span class="step-n">3</span><span><b>Get paid.</b> Cash on the spot. We load and haul it ourselves.</span></li>
       </ol>
       <a class="btn btn-gold" href="sms:{BIZ['phone_tel']}">{I['sms']} Text photos to {BIZ['phone_disp']}</a>
+      <p class="hero-alt">or call <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a></p>
     </aside>
   </div></div>
 </div>
 
 <div class="trust-bar"><div class="wrap">
   <div class="trust-item">{I['cash']}<span><b>Top dollar, guaranteed</b><small>Bring any written offer &mdash; we&rsquo;ll beat it</small></span></div>
-  <div class="trust-item">{I['truck']}<span><b>Tractors &amp; trailers</b><small>We pick up on site, any size load</small></span></div>
+  <div class="trust-item">{I['truck']}<span><b>All of Georgia</b><small>We come to you &mdash; statewide pickup</small></span></div>
+  <div class="trust-item">{I['box']}<span><b>90,000 sq ft</b><small>Inventory under one roof</small></span></div>
   <div class="trust-item">{I['weight']}<span><b>40,000&nbsp;lb+ lifts</b><small>Crane capability for the heavy stuff</small></span></div>
-  <div class="trust-item">{I['box']}<span><b>Nationwide shipping</b><small>Surplus sales shipped coast to coast</small></span></div>
 </div></div>
 
 <div class="brand-strip"><div class="wrap">
@@ -303,9 +317,9 @@ index_body = f"""
   <div class="wrap">
     <div class="section-head" data-reveal>
       <div class="kicker">What we buy</div>
-      <h2>If it moves power, we want it.</h2>
+      <h2>All types of electrical equipment. New and used.</h2>
       <p class="lead">New in the box, pulled from service, or straight off a demolition &mdash; condition
-      matters less than you think. Here&rsquo;s where the money is.</p>
+      matters less than you think, and we buy every category below. Here&rsquo;s where the money is.</p>
     </div>
     <div class="card-grid">
       <a data-reveal class="card" href="sell.html"><div class="card-img"><img src="assets/img/photos/breakers-yellow.jpg" alt="Molded case circuit breakers" loading="lazy"></div><div class="card-body"><h3>Circuit Breakers</h3><p>Molded case, miniature and industrial frame &mdash; Square&nbsp;D PowerPact breakers are our bread and butter.</p><span class="card-link">See what it&rsquo;s worth {I['arrow']}</span></div></a>
@@ -394,11 +408,12 @@ index_body = f"""
   <div class="wrap">
     <div class="section-head" data-reveal>
       <div class="kicker">Atlanta, Georgia &middot; Service area</div>
-      <h2>Atlanta today. <em>The Southeast and beyond tomorrow.</em></h2>
-      <p class="lead">Headquartered just outside Atlanta in Gwinnett County, with buyers on the
-      road across the region &mdash; and new locations on the map.</p>
+      <h2>The whole state of Georgia. <em>And beyond.</em></h2>
+      <p class="lead">Every county in Georgia, served out of Atlanta &mdash; if you&rsquo;ve got
+      equipment anywhere in the state, we come to you. New markets are already on the map.</p>
     </div>
     <div class="chip-row" data-reveal>
+      <span class="chip now">{I['pin']} All of Georgia &mdash; statewide</span>
       <span class="chip now">{I['pin']} Lawrenceville, GA &mdash; HQ</span>
       <span class="chip now">{I['pin']} Buford, GA</span>
       <span class="chip">{I['pin']} Dallas, TX</span>
@@ -423,15 +438,17 @@ index_body = f"""
 # ================================================================ SELL
 sell_body = page_hero(
     "Sell Your Surplus",
-    "Sell your surplus electrical equipment",
-    "We pay more for surplus electrical than anyone in the business — cash on the spot, "
-    "and we come get it with our own trucks.",
+    "Sell your electrical equipment — new or used",
+    "We buy all types, we pay more than anyone in the business, and we come to you anywhere "
+    "in Georgia with our own trucks. Cash on the spot.",
 ) + f"""
 <section class="tight">
   <div class="wrap">
     <div class="steps">
       <div class="step" data-reveal><h3>Text us pictures</h3><p>Photograph the nameplates, the labels and the pile itself, and text them to
-      <a href="sms:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a>. New, used, or pulled from a demo &mdash; send it all.</p></div>
+      <a href="sms:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a> or
+      <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a>. New, used, or pulled from a
+      demo &mdash; we buy all types, so send it all.</p></div>
       <div class="step" data-reveal><h3>Get a real offer</h3><p>Most offers go out the same day. Already have a bid from someone else?
       Show it to us &mdash; beating it is the whole business model.</p></div>
       <div class="step" data-reveal><h3>Get paid on the spot</h3><p>Cash when we pick up. Our tractors, trailers and crew handle the loading,
@@ -509,8 +526,9 @@ sell_body = page_hero(
       <div class="kicker">Get your number</div>
       <h2>Tell us what you&rsquo;re sitting on.</h2>
       <p class="lead">The fastest route is still a text to
-      <a href="sms:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a> with pictures &mdash; but the form works
-      too, and we answer both the same day.</p>
+      <a href="sms:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a> or
+      <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a> with pictures &mdash; but the form
+      works too, and we answer both the same day.</p>
       <ul class="checks">
         <li>{CHECK24}<span>Include brand names and amp ratings if you can see them.</span></li>
         <li>{CHECK24}<span>Rough quantity is fine &mdash; &ldquo;about three pallets&rdquo; tells us plenty.</span></li>
@@ -568,10 +586,10 @@ buy_body = page_hero(
 <section class="tight band-dark">
   <div class="wrap">
     <div class="stat-row" data-reveal>
-      <div class="stat"><b>Same day</b><span>Local pickup in Lawrenceville</span></div>
+      <div class="stat"><b>90,000 sq ft</b><span>Of inventory to pull from</span></div>
       <div class="stat"><b>50 states</b><span>Nationwide freight &amp; parcel</span></div>
       <div class="stat"><b>6 brands</b><span>Square&nbsp;D, Siemens, Eaton, ABB, GE, Westinghouse</span></div>
-      <div class="stat"><b>1 call</b><span>{BIZ['phone_disp']} &mdash; hands on your part while you hold</span></div>
+      <div class="stat"><b>2 lines</b><span>{BIZ['phone_disp']} &middot; {BIZ['phone2_disp']}</span></div>
     </div>
   </div>
 </section>
@@ -602,8 +620,8 @@ buy_body = page_hero(
 pickup_body = page_hero(
     "Pickup &amp; Logistics",
     "Our trucks. Your dock. Zero hassle.",
-    "Tractors, trailers and crane capability past 40,000 pounds — we move the equipment "
-    "other buyers won’t even quote.",
+    "Anywhere in Georgia — tractors, trailers and crane capability past 40,000 pounds. "
+    "We move the equipment other buyers won’t even quote.",
 ) + f"""
 <section class="tight">
   <div class="wrap split">
@@ -659,9 +677,9 @@ pickup_body = page_hero(
 # ================================================================ LOCATIONS
 locations_body = page_hero(
     "Locations",
-    "Two Georgia locations. One phone number.",
-    "Headquartered in Lawrenceville with a second building in Buford — and new markets "
-    "opening across the South.",
+    "Two locations. The whole state of Georgia.",
+    "Headquartered in Lawrenceville with a new building in Buford — and our trucks "
+    "covering every county in between.",
 ) + f"""
 <section class="tight">
   <div class="wrap loc-grid">
@@ -672,8 +690,10 @@ locations_body = page_hero(
         <h3>Lawrenceville, Georgia</h3>
         <address>{BIZ['addr1']}</address>
         <div class="loc-meta">
+          <span>{I['box']} 90,000 sq ft warehouse</span>
           <span>{I['clock']} Open 7 days a week &mdash; yes, Sundays too</span>
           <span>{I['phone']} <a href="tel:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a></span>
+          <span>{I['phone']} <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a></span>
         </div>
         <a class="btn btn-pine" href="https://maps.google.com/maps?q=United+Electrical+Surplus,+621+Hurricane+Shoals+Rd+NW,+Lawrenceville,+GA+30046" target="_blank" rel="noopener">{I['pin']} Get directions</a>
       </div>
@@ -681,12 +701,14 @@ locations_body = page_hero(
     <div class="loc-card" data-reveal>
       <div class="map-frame" style="border-radius:0;border:0;box-shadow:none"><iframe src="{MAP2}" title="Map — United Electrical Surplus, Buford GA" loading="lazy" style="height:300px"></iframe></div>
       <div class="loc-body">
-        <span class="loc-tag">Buford location</span>
+        <span class="loc-tag">New location</span>
         <h3>Buford, Georgia</h3>
         <address>{BIZ['addr2']}</address>
         <div class="loc-meta">
+          <span>{I['box']} 300 people on site</span>
           <span>{I['clock']} By appointment &mdash; call ahead</span>
           <span>{I['phone']} <a href="tel:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a></span>
+          <span>{I['phone']} <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a></span>
         </div>
         <a class="btn btn-pine" href="https://maps.google.com/maps?q=1901+Peachtree+Industrial+Blvd,+Buford,+GA+30518" target="_blank" rel="noopener">{I['pin']} Get directions</a>
       </div>
@@ -741,9 +763,9 @@ locations_body = page_hero(
 # ================================================================ ABOUT
 about_body = page_hero(
     "About",
-    "A family that&rsquo;s been buying metal for decades",
-    "United Electrical Surplus is the electrical arm of a Gwinnett County family business — "
-    "same yard, same handshake, sharper specialty.",
+    "The biggest buyer of electrical equipment in America",
+    "90,000 square feet, 300 people at the new location, and trucks covering every county "
+    "in Georgia — still run by the family that started it.",
 ) + f"""
 <section>
   <div class="wrap split">
@@ -755,9 +777,10 @@ about_body = page_hero(
       recycling, demolition, industrial buyouts. United Electrical Surplus grew out of a simple
       observation: the electrical gear coming across the scale was worth far more than its weight.</p>
       <p>So instead of shredding it, we built the business that pays what it&rsquo;s actually worth.
-      Today the electrical side stands on its own &mdash; a stocked warehouse, a national buying
-      operation, and customers on both sides of the counter: sellers who want top dollar and
-      contractors who want name-brand gear without the distributor markup.</p>
+      Today the electrical side stands on its own: 90,000 square feet of warehouse, 300 people at
+      the new location, trucks covering every county in Georgia, and customers on both sides of the
+      counter &mdash; sellers who want top dollar and contractors who want name-brand gear without
+      the distributor markup.</p>
       <ul class="checks">
         <li>{CHECK24}<span><b>Specialists, not generalists</b> &mdash; electrical is all we do here.</span></li>
         <li>{CHECK24}<span><b>Family-run</b> &mdash; you deal with an owner, not a purchasing portal.</span></li>
@@ -770,8 +793,8 @@ about_body = page_hero(
 <section class="tight band-dark">
   <div class="wrap">
     <div class="stat-row" data-reveal>
-      <div class="stat"><b>2</b><span>Georgia locations</span></div>
-      <div class="stat"><b>6+</b><span>Major brands stocked</span></div>
+      <div class="stat"><b>90,000</b><span>Sq ft of warehouse</span></div>
+      <div class="stat"><b>300</b><span>People at the new location</span></div>
       <div class="stat"><b>40k lbs</b><span>Crane lift capability</span></div>
       <div class="stat"><b>5.0</b><span>Google rating</span></div>
     </div>
@@ -811,7 +834,8 @@ contact_body = page_hero(
     <div class="info-card" data-reveal>
       <h3>{I['phone']} Call or text</h3>
       <p><a href="tel:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a><br>
-      Texted photos get the fastest offers.<br>{BIZ['hours']}</p>
+      <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a><br>
+      Either number reaches us. Texted photos get the fastest offers.<br>{BIZ['hours']}</p>
     </div>
     <div class="info-card" data-reveal>
       <h3>{I['mail']} Email</h3>
@@ -873,7 +897,8 @@ thanks_body = f"""
     <div class="kicker" style="justify-content:center">Message received</div>
     <h1 style="font-size:clamp(2rem,4.5vw,3.2rem)">We&rsquo;re on it.</h1>
     <p class="lead" style="margin:0 auto 30px">Expect a same-day response during business hours.
-    In a hurry? Text photos straight to <a href="sms:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a>.</p>
+    In a hurry? Text photos straight to <a href="sms:{BIZ['phone_tel']}">{BIZ['phone_disp']}</a>
+    or call <a href="tel:{BIZ['phone2_tel']}">{BIZ['phone2_disp']}</a>.</p>
     <a class="btn btn-pine" href="index.html">Back to the homepage</a>
   </div>
 </section>
@@ -893,10 +918,10 @@ e404_body = f"""
 # ================================================================ pages table
 PAGES = [
     ("index.html", "United Electrical Surplus — We Pay More for Surplus Electrical Equipment",
-     "Cash on the spot for surplus circuit breakers, panels, switchgear and transformers — Square D, Siemens, Eaton, ABB, GE. Lawrenceville & Buford GA, buying nationwide. 404-831-3600.",
+     "America's #1 buyer of electrical equipment — all types, new and used. Breakers, panels, switchgear, transformers. We service the whole state of Georgia and come to you. Cash on the spot. 404-831-3600 or 678-548-1941.",
      index_body, schema),
     ("sell.html", "Sell Surplus Electrical Equipment for Cash | United Electrical Surplus",
-     "We pay more than anyone for surplus breakers, panelboards, switchgear, transformers, bus duct and motor controls. Text photos to 404-831-3600 for a same-day cash offer.",
+     "We buy all types of electrical equipment, new and used — breakers, panelboards, switchgear, transformers, bus duct, motor controls. Statewide Georgia pickup. Text photos to 404-831-3600 or 678-548-1941 for a same-day cash offer.",
      sell_body, ""),
     ("buy.html", "Buy Surplus Electrical Equipment | United Electrical Surplus",
      "Name-brand surplus electrical equipment — Square D breakers, panels, switchgear, transformers, wire — tested, guaranteed and shipped nationwide from Lawrenceville, GA.",
@@ -911,7 +936,7 @@ PAGES = [
      "The electrical arm of a Lawrenceville family metals business: specialist buyers, a stocked warehouse and one honest cash offer at a time.",
      about_body, ""),
     ("contact.html", "Contact | United Electrical Surplus",
-     "Call or text 404-831-3600, email info@unitedelectricalsurplus.com, or send the form — every message gets a same-day answer.",
+     "Call or text 404-831-3600 or 678-548-1941, email info@unitedelectricalsurplus.com, or send the form — every message gets a same-day answer.",
      contact_body, ""),
     ("thank-you.html", "Thanks — Message Received | United Electrical Surplus",
      "Your message is in. Expect a same-day response from United Electrical Surplus.",

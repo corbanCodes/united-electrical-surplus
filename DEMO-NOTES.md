@@ -1,7 +1,9 @@
 # United Electrical Surplus — demo notes
 
 **Client:** Vinnie (Gus's son) · United Electrical Surplus — buys/sells electrical, NOT a scrap/recycling guy
-**Phone:** 404-831-3600 ← CONFIRMED the real number (4048303600 was a typo in the intake notes)
+**Phones:** BOTH advertised sitewide (Corban 10/10) — 404-831-3600 and 678-548-1941.
+The 678 is the number on his Google listing; he wants both out there, so they appear
+together in the top bar, footer, contact page and both location cards.
 **Emails:** info@unitedelectricalsurplus.com + unitedelectricalsurplus@yahoo.com
 **Existing site:** unitedelectricalsurplus.com (WordPress/Elementor — the one he wants to leave)
 **HQ:** 621 Hurricane Shoals Rd NW, Lawrenceville, GA 30046 (same yard as his dad's United Recycling)
@@ -36,6 +38,40 @@ The old site's Mon–Sat 8–6 is wrong.
 - Atlanta green-and-gold background → stylized Atlanta skyline (SVG) on the homepage
   service-area band and the locations expansion band.
 - (678) 548-1941 = note for Corban only (it's what the GMB listing shows) — NOT on the site.
+
+## Positioning added 10/10 (Corban)
+
+- **Two numbers** everywhere (see above).
+- **"We service the whole state of Georgia"** — replaced the old "buying nationwide" lead.
+  Statewide is now the hero sub, a trust-bar tile, the homepage service-area heading and
+  the first chip, and the locations-page H1.
+- **"All types of electrical equipment, new and used"** — hero sub, the what-we-buy heading
+  ("All types of electrical equipment. New and used."), sell-page hero and meta descriptions.
+- **"We come to you"** — hero chip, trust bar, sell + pickup page heroes.
+- **America's #1 buyer of electrical equipment** — hero kicker, About page H1, footer blurb,
+  homepage meta description. Stored as `BIZ["rank_claim"]` so it's ONE string to change.
+- **90,000 sq ft** — trust bar, About stats, buy-page stats, Lawrenceville location card.
+- **300 people at the new location** — About stats + the Buford card.
+
+### Judgment call to make before launch
+
+The "#1 / biggest in America" line is the one claim on this site that a competitor could
+actually challenge, because it is a measurable superlative rather than puffery like "we pay
+more." The 90,000 sq ft and 300 people make it defensible-sounding, but nobody has verified
+it. Two options, both one edit to `BIZ["rank_claim"]`:
+
+- Keep as-is if Vinnie stands behind it.
+- Soften to **"One of America's largest buyers of electrical equipment"** — keeps the
+  size flex, drops the rankable claim.
+
+Worth 30 seconds of asking him on the call.
+
+### Unverified detail
+
+Whether the 90,000 sq ft is the Lawrenceville yard or the new Buford building was not
+specified. It currently sits on the **Lawrenceville** card; the 300 people sit on **Buford**
+(he said "at the new location"). Move the sq-ft line between the two cards in
+`locations_body` if it's the other way around.
 
 ## OPEN ITEMS
 
