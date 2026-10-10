@@ -19,8 +19,9 @@ BIZ = {
     "hours": "Open 7 days a week — even Sundays",
     "domain": "https://unitedelectricalsurplus.com",
     "google_page": "https://maps.google.com/?cid=3954105873428335092",
-    # TODO(launch): swap for the real Facebook page URL once Vinnie confirms it.
-    "facebook": "https://www.facebook.com/search/top/?q=United%20Electrical%20Surplus",
+    # Facebook link from Corban 10/10 — a group post of Vinnie's; swap for a
+    # business Page URL if he ever makes one.
+    "facebook": "https://www.facebook.com/groups/417309805544906/posts/1745200596089147/",
 }
 
 MAP1 = ("https://maps.google.com/maps?q=United%20Electrical%20Surplus%2C%20621%20Hurricane"

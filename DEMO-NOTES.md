@@ -44,10 +44,10 @@ The old site's Mon–Sat 8–6 is wrong.
    If 3699 is actually a second line (power pack/breaker desk?), it's one string in
    `_generator/build.py`.
 
-1. **Facebook page URL.** Could not find it from the number on the open web, and FB search
-   needs a login. The Facebook buttons currently point at a Facebook SEARCH for the business
-   name (works, but is a stand-in). Get the real page link from Vinnie — it's one string in
-   `_generator/build.py` (`BIZ["facebook"]`) + rebuild.
+1. **Facebook link** — RESOLVED 10/10: Corban supplied a link and every Facebook button now
+   points at it. Note it's a group POST (facebook.com/groups/417309805544906/posts/...),
+   not a business Page; if Vinnie ever creates a real Page, swap `BIZ["facebook"]` in
+   `_generator/build.py` + rebuild.
 2. **GMB phone mismatch.** His Google listing shows (678) 548-1941; his site says 404-831-3600.
    Corban confirmed 404-831-3600 is real. The GMB should probably be updated — SEO task.
 3. **GMB hours mismatch.** Listing says Open 24 hours, site says Mon–Sat 8–6.
