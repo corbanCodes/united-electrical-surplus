@@ -168,6 +168,8 @@ def chrome_footer():
         <li>{I['pin']} <span>{BIZ['addr1']}</span></li>
         <li>{I['pin']} <span>{BIZ['addr2']}</span></li>
         <li>{I['clock']} <span>{BIZ['hours']}</span></li>
+        <li>{I['fb']} <a href="{BIZ['facebook']}" target="_blank" rel="noopener">Find us on Facebook</a></li>
+        <li>{I['google']} <a href="{BIZ['google_page']}" target="_blank" rel="noopener">Find us on Google</a></li>
       </ul>
     </div>
   </div>
@@ -367,6 +369,7 @@ index_body = f"""
   </div>
   <div class="g-actions">
     <a class="btn btn-pine" href="{BIZ['google_page']}" target="_blank" rel="noopener">{I['google']} Find us on Google</a>
+    <a class="btn btn-pine" href="{BIZ['facebook']}" target="_blank" rel="noopener">{I['fb']} Find us on Facebook</a>
     <a class="btn btn-ghost" href="{BIZ['google_page']}" target="_blank" rel="noopener">Leave a review</a>
   </div>
 </div></div>
